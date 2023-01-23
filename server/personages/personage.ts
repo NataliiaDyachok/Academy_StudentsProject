@@ -1,18 +1,23 @@
 class Personage {
 
-  private health: Number;
+  private health: number;
   name = 'Personage';
 
-  public getHealth(): Number {
-    return this.health;
-  };
-
-  public setHealth(num: Number): void {
+  constructor(namePers: string, num: number) {
+    this.name = namePers;
     this.health = num;
-  };
+  }
 
-  public attack() {};
-  public capabilities() {};
+  public getHealth(): number {
+    return this.health;
+  }
+
+  public setHealth(num: number): void {
+    this.health = num;
+  }
+
+  public attack() {console.log('attack');}
+  public capabilities() {console.log('capabilities');}
 
 }
 

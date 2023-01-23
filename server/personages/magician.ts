@@ -1,10 +1,9 @@
-import Personage from './personage';
+import Personage from './personage.js';
 
 class Magician extends Personage {
 
   constructor() {
-    super()
-    this.name = 'Magician'
+    super('Magician', 0);
   }
 }
 

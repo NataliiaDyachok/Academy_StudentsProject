@@ -1,8 +1,13 @@
-const Router = require('express');
+import Router from 'express';
 const router = new Router();
-const expressWs = require('express-ws')(router);
 
-// const controllers = require('../controllers/index');
+import expressWs from 'express-ws';
+const expressWsRouter = expressWs(router);
+
+import controllers from '../controllers/index.js';
+// const eventsController = controllers.eventsController;
+
+const connections = new Set();
 
 router.use(function (req, res, next) {
   console.log('middleware');
@@ -10,23 +15,28 @@ router.use(function (req, res, next) {
   return next();
 });
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   res.send('Express + TypeScript Server');
 });
 
 router.ws('/ws', function (ws, req) {
-  ws.on('message', function (msg) {
-    console.log(msg);
+  ws.on('message', function (message) {
+    console.log(message);
+    connections.forEach((client) => {
+      client.send(JSON.stringify(message));
+    });
   });
   ws.on('close', function () {
     console.log('The connection was closed! ');
+    connections.delete(ws);
   });
 });
 
-const aWss = expressWs.getWss('/ws');
+const aWss = expressWsRouter.getWss('/ws');
 
 aWss.on('connection', function (socket) {
-  console.log('Connection open');
+  connections.add(socket);
+  console.log('Connection open ' + socket._closeCode);
 });
 
-module.exports = router;
+export default router;

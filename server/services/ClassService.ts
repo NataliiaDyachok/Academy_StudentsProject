@@ -1,6 +1,6 @@
-import Creator from '../personages/creator';
-import Personage from '../personages/personage';
-import EnumPersonage from '../personages/enums';
+import Creator from '../personages/creator.js';
+import Personage from '../personages/personage.js';
+import EnumPersonage from '../enums/enumPersonage.js';
 
 class ClassService {  
     
@@ -20,4 +20,5 @@ class ClassService {
 // const PERSONAGE_THIEF = new Facade().createPersonageThief();
 // console.log(PERSONAGE_THIEF.name);
 
-module.exports = ClassService;
+// module.exports = ClassService;
+export default ClassService;

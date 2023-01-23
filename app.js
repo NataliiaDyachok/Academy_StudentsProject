@@ -1,4 +1,4 @@
-const server = require('./server');
+import server from './server/index.js';
 
 function enableGracefulExit() {
   const exitHandler = (error) => {

@@ -1,17 +1,17 @@
-import Personage from './personage';
-import Soldier from './soldier';
-import Thief from './thief';
-import Magician from './magician';
-import EnumPersonage from './enums';
+import Personage from './personage.js';
+import Soldier from './soldier.js';
+import Thief from './thief.js';
+import Magician from './magician.js';
+import EnumPersonage from '../enums/enumPersonage.js';
 
 class Creator {
   static createObject(someProperty: string): Personage {
       if (someProperty === EnumPersonage.MAGICIAN) {
-          return new Magician()
+          return new Magician();
       } else if (someProperty === EnumPersonage.THIEF) {
-          return new Thief()
+          return new Thief();
       } else {
-          return new Soldier()
+          return new Soldier();
       }
   }
 }
