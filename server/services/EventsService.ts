@@ -13,6 +13,10 @@ class EventsService {
   async restore() {
       return true;
   }
+  async ability() {
+    return true;
+  }
+
 }
 
 export default EventsService;

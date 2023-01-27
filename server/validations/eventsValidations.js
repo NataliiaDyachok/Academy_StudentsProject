@@ -6,7 +6,7 @@ const attackValidation = (data) => {
     type: Joi.string()
       .valid(...Object.values(EnumEventType))
       .required(),
-    userId: Joi.number.required(),
+    userId: Joi.number().required(),
   });
 
   return schema.validate(data);
@@ -33,8 +33,19 @@ const restoreValidation = (data) => {
   return schema.validate(data);
 };
 
+const abilityValidation = (data) => {
+  const schema = Joi.object({
+    type: Joi.string()
+      .valid(...Object.values(EnumEventType))
+      .required(),
+  });
+
+  return schema.validate(data);
+};
+
 export default {
   attackValidation,
   messageValidation,
   restoreValidation,
+  abilityValidation,
 };
