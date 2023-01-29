@@ -1,6 +1,6 @@
-const ApiError = require('../error/ApiError');
-const userValidation = require('../validations/userValidation');
-const userService = require('../services/UserService.ts');
+import ApiError from '../error/ApiError.js';
+import userValidation from '../validations/userValidation.js';
+// import UserService from '../services/UserService.js';
 
 const registerPost = async (req, res, next) => {
   try {
@@ -10,7 +10,7 @@ const registerPost = async (req, res, next) => {
       return;
     }
 
-    new userService().register();
+    // new UserService().register();
 
     const user = {
       firstName: req.body.firstName || '',
@@ -74,7 +74,7 @@ const forgotPasswordPut = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export default {
   registerPost,
   loginPost,
   updPersonalDataPut,

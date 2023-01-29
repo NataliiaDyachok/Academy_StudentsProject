@@ -1,12 +1,12 @@
-const server = require('./routes');
-const { port } = require('./config');
+import server from './routes/index.js';
+import config from './config/index.js';
 
 let listener;
 
 async function start() {
   try {
-    listener = server.listen(port, () => {
-      console.log(`Server successfully started on port ${port}`);
+    listener = server.listen(config.port, () => {
+      console.log(`Server successfully started on port ${config.port}`);
     });
   } catch (err) {
     console.error(`ATTENTION!!! ${err}`);
@@ -29,7 +29,7 @@ function stop(callback) {
   });
 }
 
-module.exports = {
+export default {
   start,
   stop,
 };

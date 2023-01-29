@@ -1,5 +1,5 @@
-const ApiError = require('../error/ApiError');
-const userService = require('../services/ClassService.ts');
+import ApiError from '../error/ApiError.js';
+// import userService from '../services/ClassService.js';
 
 const getClassesList = async (req, res, next) => {
   try {
@@ -11,6 +11,6 @@ const getClassesList = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export default {
   getClassesList,
 };

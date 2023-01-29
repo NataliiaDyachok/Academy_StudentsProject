@@ -1,6 +1,7 @@
-const ApiError = require('../error/ApiError');
-const userController = require('./UserController');
-const classController = require('./ClassController');
+import ApiError from '../error/ApiError.js';
+import userController from './UserController.js';
+import classController from './ClassController.js';
+import eventsController from './EventsController.js';
 
 function notFound(req, res) {
   const resObj = ApiError.badRequest('Bad Request');
@@ -11,8 +12,9 @@ function notFound(req, res) {
   res.end();
 }
 
-module.exports = {
+export default {
   userController,
   classController,
+  eventsController,
   notFound,
 };
