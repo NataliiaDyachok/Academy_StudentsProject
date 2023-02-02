@@ -1,28 +1,17 @@
 import ApiError from '../error/ApiError.js';
 import userValidation from '../validations/userValidation.js';
-// import UserService from '../services/UserService.js';
+import UserService from '../services/UserService.js';
 
-const registerPost = async (req, res, next) => {
-  try {
-    const { error } = userValidation.registerValidation(req.body);
-    if (error) {
-      next(ApiError.badRequest(error.message || error));
-      return;
-    }
-
-    // new UserService().register();
-
-    const user = {
-      firstName: req.body.firstName || '',
-      lastName: req.body.lastName || '',
-      email: req.body.email,
-      password: req.body.password,
-    };
-
-    res.json(user);
-  } catch (err) {
-    next(ApiError.notImplemented(err.message || err));
+const registerPost = async (req, res) => {
+  const { error } = userValidation.registerValidation(req.body);
+  if (error) {
+    next(ApiError.badRequest(error.message || error));
+    return;
   }
+
+  const result = await new UserService().register(req.body);
+
+  res.json(result);
 };
 
 const loginPost = async (req, res, next) => {

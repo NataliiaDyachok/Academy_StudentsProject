@@ -1,12 +1,6 @@
-// const {
-//   db: { config, defaultType },
-// } = require('../../config');
+import ApiError from '../error/ApiError.js';
 
-// const { fatal } = require('../error/ApiError');
-
-import { fatal } from '../error/ApiError';
-
-import configObj from '../../config';
+import configObj from '../config/index.js';
 const {
   db: { config, defaultType },
 } = configObj;
@@ -20,16 +14,15 @@ const funcWrapper = (func) =>
 const init = async () => {
   try {
     for (const [k, v] of Object.entries(config)) {
-      // const wrapper = require(`./${k}`)(v);
-      const wrapperFile = await import(`./${k}`);
-      const wrapper = wrapperFile(v);
+      const wrapperFile = await import(`./${k}/index.js`);
+      const wrapper = wrapperFile.default(v);
 
       await wrapper.testConnection();
       console.log(`INFO: DB wrapper for ${k} initiated`);
       db[k] = wrapper;
     }
   } catch (error) {
-    fatal(`FATAL: ${error.message || error}`);
+    ApiError.fatal(`FATAL: ${error.message || error}`);
   }
 };
 
@@ -54,7 +47,7 @@ const getType = () => type;
 
 const dbWrapper = (t) => db[t] || db[type];
 
-module.exports = {
+export default {
   init,
   end,
   setType,

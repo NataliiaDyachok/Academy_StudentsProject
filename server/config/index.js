@@ -1,6 +1,4 @@
 import dotenv from 'dotenv';
-// dotenv.config({ path: '../../.env' });
-// dotenv.config({ path: path.join(__dirname, '.env') });
 dotenv.config();
 
 import ApiError from '../error/ApiError.js';
