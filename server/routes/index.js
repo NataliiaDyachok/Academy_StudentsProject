@@ -6,19 +6,33 @@ const router = new Router();
 import expressWs from 'express-ws';
 const expressWsRouter = expressWs(router);
 
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+
+// import { authorize } from '../middleware/authMiddleware.js';
+
 import enumEvents from '../enums/enumEvents.js';
 import eventsValidations from '../validations/eventsValidations.js';
 
 import controllers from '../controllers/index.js';
-// const eventsController = controllers.eventsController;
 
 const connections = new Set();
 
-router.use(function (req, res, next) {
-  console.log('middleware');
-  req.testing = 'testing';
-  return next();
-});
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(
+  cors({
+    origin: '*',
+  }),
+);
+router.use(cookieParser());
+
+router.post('/register', controllers.userController.registerPost);
+// router.post('/login', controllers.userController.loginPost);
+// router.get('/refresh', controllers.userController.refreshPost);
+
+// router.use(authorize);
 
 router.get('/', (req, res, next) => {
   res.send('Express + TypeScript Server');

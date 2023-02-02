@@ -1,10 +1,15 @@
 import server from './routes/index.js';
 import config from './config/index.js';
+import db from './db/index.js';
 
 let listener;
 
 async function start() {
   try {
+    await db.init();
+    db.setType(config.db.defaultType);
+    console.log(`Now db type is ${db.getType()}`);
+
     listener = server.listen(config.port, () => {
       console.log(`Server successfully started on port ${config.port}`);
     });
